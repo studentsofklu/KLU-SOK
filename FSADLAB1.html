@@ -178,66 +178,6 @@
       border-radius: 2px;
     }
 
-    .search-box {
-      display: flex;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .search-box input {
-      padding: 10px 15px 10px 40px;
-      border: none;
-      border-radius: 4px;
-      outline: none;
-      width: 200px;
-      background-color: rgba(255,255,255,0.15);
-      color: white;
-      font-size: 14px;
-      transition: all 0.3s;
-      backdrop-filter: blur(5px);
-    }
-
-    .search-box input:focus {
-      width: 250px;
-      background-color: rgba(0,0,0,0.7);
-      box-shadow: 0 0 0 2px #00a8e1;
-    }
-
-    .search-box input::placeholder {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .search-box::before {
-      content: '\f002';
-      font-family: 'Font Awesome 6 Free';
-      font-weight: 900;
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(255,255,255,0.7);
-      z-index: 1;
-    }
-
-    .search-box button {
-      background: linear-gradient(135deg, #00a8e1, #007eb9);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-left: 10px;
-      transition: all 0.3s;
-      font-weight: 600;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .search-box button:hover {
-      background: linear-gradient(135deg, #0088b7, #006a9b);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-
     /* Mobile menu styles */
     .mobile-menu-backdrop {
       position: fixed;
@@ -970,19 +910,6 @@
       background: #f5f5f5;
     }
 
-    body[data-theme="light"] .search-box input {
-      background-color: rgba(0,0,0,0.05);
-      color: black;
-    }
-
-    body[data-theme="light"] .search-box input::placeholder {
-      color: rgba(0, 0, 0, 0.7);
-    }
-
-    body[data-theme="light"] .search-box::before {
-      color: rgba(0, 0, 0, 0.7);
-    }
-
     body[data-theme="light"] .docs-section h2 {
       color: black;
     }
@@ -1067,16 +994,6 @@
         flex-wrap: wrap;
       }
 
-      .search-box {
-        width: 100%;
-        margin-top: 15px;
-        order: 3;
-      }
-
-      .search-box input {
-        width: 100%;
-      }
-
       .docs-container {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 15px;
@@ -1094,11 +1011,6 @@
       
       .footer-content a {
         padding: 8px 16px;
-      }
-
-      /* Hide search when menu is open */
-      body.menu-open .search-box {
-        display: none;
       }
 
       /* Adjust theme toggle for mobile */
@@ -1197,10 +1109,7 @@
       <i class="bi bi-sun"></i>
       <i class="bi bi-moon" style="display: none;"></i>
     </button>
-    <div class="search-box">
-      <input type="text" id="search-input" placeholder="Search materials..." oninput="searchDocuments()">
-      <button onclick="searchDocuments()"><i class="fas fa-search"></i></button>
-    </div>
+
   </header>
 
   <!-- Mobile Menu -->
@@ -1220,11 +1129,6 @@
   </div>
 
   <div class="main-content">
-    <!-- No results message -->
-    <div class="no-results" id="noResults">
-      No documents found matching your search.
-    </div>
-
     <!-- Enhanced Download Section -->
     <section class="download-section">
       <div class="content-grid">
@@ -1302,49 +1206,6 @@
       mobileMenuBackdrop.style.display = 'none';
       body.classList.remove('menu-open');
     });
-
-    // Search functionality
-    function searchDocuments() {
-      const searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
-      const docSections = document.querySelectorAll('.docs-section');
-      let anyResultsFound = false;
-
-      // Reset no results messages
-      document.querySelectorAll('.no-results').forEach(el => {
-        el.style.display = 'none';
-      });
-
-      docSections.forEach(section => {
-        const docCards = section.querySelectorAll('.doc-card');
-        const noResultsElement = section.querySelector('.no-results');
-        let sectionHasResults = false;
-
-        docCards.forEach(card => {
-          const title = card.querySelector('.doc-title').textContent.toLowerCase();
-          
-          if (title.includes(searchQuery)) {
-            card.style.display = 'block';
-            sectionHasResults = true;
-            anyResultsFound = true;
-          } else {
-            card.style.display = 'none';
-          }
-        });
-
-        const sectionHeading = section.querySelector('h2');
-        if (sectionHasResults) {
-          sectionHeading.style.display = 'block';
-          if (noResultsElement) noResultsElement.style.display = 'none';
-        } else {
-          if (searchQuery.length > 0 && noResultsElement) {
-            noResultsElement.style.display = 'block';
-          } else if (noResultsElement) {
-            noResultsElement.style.display = 'none';
-          }
-          sectionHeading.style.display = searchQuery.length > 0 ? 'block' : 'block';
-        }
-      });
-    }
 
     // Optimized scroll handler with throttling
     function throttle(func, limit) {
