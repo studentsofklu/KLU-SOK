@@ -1281,11 +1281,11 @@ document.addEventListener('contextmenu', function (e) {
   e.preventDefault();
 });
 
-// Disable keyboard shortcuts
+// Disable key shortcuts
 document.addEventListener('keydown', function (e) {
   const key = e.key.toLowerCase();
 
-  // Block F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+C
+  // F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+C
   if (
     e.keyCode === 123 || // F12
     (e.ctrlKey && e.shiftKey && key === 'i') || // Ctrl+Shift+I
@@ -1297,33 +1297,12 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Disable dragstart (image/text drag)
-document.addEventListener('dragstart', function (e) {
-  e.preventDefault();
-});
-
-// Disable text selection (double tap / long press drag)
-document.addEventListener('selectstart', function (e) {
-  e.preventDefault();
-});
-
-// Disable touch events (touch and hold)
-document.addEventListener('touchstart', function (e) {
-  if (e.touches.length > 1) {
-    e.preventDefault();
-  }
-}, { passive: false });
-
-document.addEventListener('touchmove', function (e) {
-  e.preventDefault();
-}, { passive: false });
-
-// Disable iframe view
+// Block iframes
 if (window.top !== window.self) {
   window.top.location = window.self.location;
 }
 
-// DevTools detection via console.log trick
+// DevTools detection via console.log trap
 (function () {
   const element = new Image();
   Object.defineProperty(element, 'id', {
@@ -1337,7 +1316,7 @@ if (window.top !== window.self) {
   }, 1000);
 })();
 
-// DevTools detection via size difference
+// DevTools detection via window size difference
 (function () {
   const threshold = 160;
   setInterval(() => {
@@ -1350,7 +1329,7 @@ if (window.top !== window.self) {
   }, 1000);
 })();
 
-// Display block message with GIF
+// Show custom message and GIF
 function showBlockMessage() {
   document.body.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: black; color: white;">
