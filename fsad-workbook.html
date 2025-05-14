@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FSAD Materials</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Amazon Ember', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0f1923;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    @font-face {
+      font-family: 'Amazon Ember';
+      src: url('https://m.media-amazon.com/images/G/01/primevideo/seo/primevideo-sans._TTH_.ttf') format('truetype');
+    }
+
+    /* Header with enhanced styling */
+    header {
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      backdrop-filter: blur(5px);
+    }
+
+    header.scrolled {
+      background-color: rgba(15, 25, 35, 0.95);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      padding: 10px 5%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      color: #00a8e1;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(0, 168, 225, 0.3);
+      transition: all 0.3s;
+    }
+
+    header.scrolled .logo h1 {
+      font-size: 24px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: all 0.3s;
+      font-size: 16px;
+      padding: 5px 0;
+      display: block;
+    }
+
+    nav ul li a:hover, nav ul li a.active {
+      color: #00a8e1;
+      transform: translateY(-2px);
+    }
+
+    nav ul li a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #00a8e1, #007eb9);
+      border-radius: 2px;
+    }
+
+    .search-box {
+      display: flex;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .search-box input {
+      padding: 10px 15px 10px 40px;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      width: 200px;
+      background-color: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 14px;
+      transition: all 0.3s;
+      backdrop-filter: blur(5px);
+    }
+
+    .search-box input:focus {
+      width: 250px;
+      background-color: rgba(0,0,0,0.7);
+      box-shadow: 0 0 0 2px #00a8e1;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .search-box::before {
+      content: '\f002';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.7);
+      z-index: 1;
+    }
+
+    .search-box button {
+      background: linear-gradient(135deg, #00a8e1, #007eb9);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: all 0.3s;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .search-box button:hover {
+      background: linear-gradient(135deg, #0088b7, #006a9b);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Course Sections with Enhanced Styling */
+    .docs-section {
+      padding: 60px 5%;
+      position: relative;
+    }
+
+    .docs-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 168, 225, 0.5), transparent);
+    }
+
+    .docs-section h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      padding-left: 20px;
+      display: inline-block;
+    }
+
+    .docs-section h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 5px;
+      background: linear-gradient(to bottom, #00a8e1, #007eb9);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(0, 168, 225, 0.5);
+    }
+
+    .docs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .doc-card {
+      background: linear-gradient(135deg, #1a2a3a, #14202d);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .doc-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      z-index: 10;
+      border-color: rgba(0, 168, 225, 0.3);
+    }
+
+    .doc-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 40%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .doc-card:hover::after {
+      opacity: 1;
+    }
+
+    .doc-thumbnail {
+      width: 100%;
+      height: 250px;
+      background-color: #2a3a4a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .doc-thumbnail::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(0, 168, 225, 0.1), transparent);
+      z-index: 1;
+    }
+
+    .doc-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .doc-card:hover .doc-thumbnail img {
+      transform: scale(1.1);
+    }
+
+    .doc-info {
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .doc-title {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #ffffff;
+      transition: color 0.3s;
+    }
+
+    .doc-card:hover .doc-title {
+      color: #00a8e1;
+    }
+
+    .doc-meta {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .doc-meta::before {
+      content: '\f06e';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-right: 8px;
+      color: #00a8e1;
+      font-size: 12px;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px;
+      color: rgba(255,255,255,0.7);
+      font-size: 18px;
+      display: none;
+    }
+
+    /* Enhanced Footer with Telegram Effects */
+    footer {
+      background: linear-gradient(180deg, #0a121b, #070d14);
+      padding: 30px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 168, 225, 0.5), transparent);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-content p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .footer-content a {
+      color: #00a8e1;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 30px;
+      background: rgba(0, 168, 225, 0.1);
+      border: 1px solid rgba(0, 168, 225, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-content a:hover {
+      color: #ffffff;
+      background: rgba(0, 168, 225, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 168, 225, 0.3);
+    }
+
+    .footer-content a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transition: 0.5s;
+    }
+
+    .footer-content a:hover::before {
+      left: 100%;
+    }
+
+    .footer-content a i {
+      transition: transform 0.3s;
+    }
+
+    .footer-content a:hover i {
+      transform: rotate(-30deg);
+    }
+
+    /* Telegram icon pulse effect */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 168, 225, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 168, 225, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 168, 225, 0);
+      }
+    }
+
+    .footer-content a i {
+      animation: pulse 2s infinite;
+    }
+
+    .footer-content a:hover i {
+      animation: none;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a121b;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #00a8e1;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #007eb9;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+      
+      nav {
+        margin: 15px 0;
+        width: 100%;
+      }
+      
+      nav ul {
+        justify-content: space-between;
+        width: 100%;
+      }
+      
+      nav ul li a {
+        margin: 0 5px;
+      }
+      
+      .search-box {
+        width: 100%;
+        margin: 15px 0;
+      }
+      
+      .search-box input {
+        width: 100%;
+      }
+      
+      .docs-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      
+      .footer-content a {
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .docs-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="main-header">
+    <div class="logo">
+      <h1>FSAD</h1>
+    </div>
+    <nav>
+      <ul>
+      <li><a href="index.html" class="active">HOME</a></li>
+      <li><a href="cources.html" class="active">COURCES</a></li>
+      <li><a href="SILS.html" class="active">SIL</a></li>
+
+      </ul>
+    </nav>
+    <div class="search-box">
+      <input type="text" id="search-input" placeholder="Search materials..." oninput="searchDocuments()">
+      <button onclick="searchDocuments()"><i class="fas fa-search"></i></button>
+    </div>
+  </header>
+
+  <section class="docs-section">
+    <h2>WORKBOOK</h2>
+
+
+    <div class="docs-container" id="docsContainer">
+      <!-- Example of a single PDF item -->
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB1.html">
+  <div class="doc-thumbnail">
+    <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB1.jpg" alt="LAB 1 Image" style="width: 100%; height: 250px; object-fit: cover;">
+  </div>
+  <div class="doc-info">
+    <div class="doc-title">LAB 1</div>
+    <div class="doc-meta">LAB 1</div>
+  </div>
+</a>
+
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB2.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB2.jpg" alt="LAB 2 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 2</div>
+          <div class="doc-meta">LAB 2</div>
+        </div>
+      </a>
+
+  <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB3.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB3.jpg" alt="LAB 3 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 3</div>
+          <div class="doc-meta">LAB 3</div>
+        </div>
+      </a>
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB4.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB4.jpg" alt="LAB 4 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 4</div>
+          <div class="doc-meta">LAB 4</div>
+        </div>
+      </a>
+
+  <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB5.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB5.jpg" alt="LAB 5 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 5</div>
+          <div class="doc-meta">LAB 5</div>
+        </div>
+      </a>
+
+   <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB6.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB6.jpg" alt="LAB 6 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 6</div>
+          <div class="doc-meta">LAB 6</div>
+        </div>
+      </a>
+
+ <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB7.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB7.jpg" alt="LAB 7 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 7</div>
+          <div class="doc-meta">LAB 7</div>
+        </div>
+      </a>
+
+    <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB8.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB8.jpg" alt="LAB 8 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 8</div>
+          <div class="doc-meta">LAB 8</div>
+        </div>
+      </a>
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB9.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB9.jpg" alt="LAB 9 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 9</div>
+          <div class="doc-meta">LAB 9</div>
+        </div>
+      </a>
+
+   <a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB10.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB10.jpg" alt="LAB 10 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 10</div>
+          <div class="doc-meta">LAB 10</div>
+        </div>
+      </a>
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB11.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB11.jpg" alt="LAB 11 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 11</div>
+          <div class="doc-meta">LAB 11</div>
+        </div>
+      </a>
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB12.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB12.jpg" alt="LAB 12 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 12</div>
+          <div class="doc-meta">LAB 12</div>
+        </div>
+      </a>
+
+<a class="doc-card" href="/FSAD/WOKBOOKS/FSADLAB13.html">
+        <div class="doc-thumbnail">
+          <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/LAB/LAB13.jpg
+" alt="LAB 13 Image" style="width: 100%; height: 250px; object-fit: cover;">
+        </div>
+        <div class="doc-info">
+          <div class="doc-title">LAB 13</div>
+          <div class="doc-meta">LAB 13</div>
+        </div>
+      </a>
+
+      <!-- No results message -->
+      <div class="no-results" id="noResults">
+        No documents found matching your search.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Students of KLU. All rights reserved.</p>
+      <p><a href="https://t.me/students_of_klu" target="_blank"><i class="fab fa-telegram-plane"></i> Join us on Telegram</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function searchDocuments() {
+      const searchQuery = document.getElementById('search-input').value.replace(/\s+/g, '').toLowerCase();
+      const docSections = document.querySelectorAll('.docs-section');
+      let anyResultsFound = false;
+
+      docSections.forEach(section => {
+        const docCards = section.querySelectorAll('.doc-card');
+        let sectionHasResults = false;
+
+        docCards.forEach(card => {
+          const title = card.querySelector('.doc-title').textContent.replace(/\s+/g, '').toLowerCase();
+          
+          if (title.includes(searchQuery)) {
+            card.style.display = 'block';
+            sectionHasResults = true;
+            anyResultsFound = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        const sectionHeading = section.querySelector('h2');
+        if (sectionHasResults) {
+          sectionHeading.style.display = 'block';
+        } else {
+          sectionHeading.style.display = 'none';
+        }
+      });
+
+      // Show/hide no results message
+      const noResults = document.getElementById('noResults');
+      if (!anyResultsFound && searchQuery.length > 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    // Add scroll effect to header
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('main-header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
