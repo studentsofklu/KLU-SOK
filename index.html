@@ -141,47 +141,110 @@
       margin-right: 15px;
     }
 
-    /* Desktop navigation - hidden on mobile */
-    #desktop-nav {
-      display: flex;
-    }
+#desktop-nav {
+  display: flex;
+}
 
-    #desktop-nav ul {
-      display: flex;
-      list-style: none;
-    }
+#desktop-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    #desktop-nav ul li {
-      position: relative;
-    }
+#desktop-nav ul li {
+  position: relative;
+  margin: 0 10px;
+}
 
-    #desktop-nav ul li a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 500;
-      transition: all 0.3s;
-      font-size: 16px;
-      padding: 5px 0;
-      display: block;
-    }
+#desktop-nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 15px;
+  display: block;
+  position: relative;
+  transition: color 0.3s ease;
+  z-index: 0;
+}
 
-    #desktop-nav ul li a:hover, 
-    #desktop-nav ul li a.active {
-      color: #00a8e1;
-      transform: translateY(-2px);
-    }
+/* Create 4 glowing border lines initially hidden */
+#desktop-nav ul li a::before,
+#desktop-nav ul li a::after,
+#desktop-nav ul li a span::before,
+#desktop-nav ul li a span::after {
+  content: '';
+  position: absolute;
+  background: #00a8e1;
+  transition: all 0.4s ease;
+  opacity: 0;
+  border-radius: 2px;
+}
 
-    #desktop-nav ul li a.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #00a8e1, #007eb9);
-      border-radius: 2px;
-    }
+/* Top and Bottom lines */
+#desktop-nav ul li a::before,
+#desktop-nav ul li a::after {
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+#desktop-nav ul li a::before {
+  top: 0;
+  transform: translateX(-100%);
+}
+
+#desktop-nav ul li a::after {
+  bottom: 0;
+  transform: translateX(100%);
+}
+
+/* Left and Right lines (using a span inside link) */
+#desktop-nav ul li a > span {
+  position: relative;
+  display: inline-block;
+}
+
+#desktop-nav ul li a span::before,
+#desktop-nav ul li a span::after {
+  top: 0;
+  width: 2px;
+  height: 100%;
+}
+
+#desktop-nav ul li a span::before {
+  left: 0;
+  transform: translateY(-100%);
+}
+
+#desktop-nav ul li a span::after {
+  right: 0;
+  transform: translateY(100%);
+}
+
+/* On hover or active: show the glowing lines and change text color only */
+#desktop-nav ul li a:hover,
+#desktop-nav ul li a.active {
+  color: #00a8e1;
+  /* NO text-shadow here */
+  z-index: 1;
+}
+
+#desktop-nav ul li a:hover::before,
+#desktop-nav ul li a:hover::after,
+#desktop-nav ul li a:hover > span::before,
+#desktop-nav ul li a:hover > span::after,
+#desktop-nav ul li a.active::before,
+#desktop-nav ul li a.active::after,
+#desktop-nav ul li a.active > span::before,
+#desktop-nav ul li a.active > span::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+
+
 
     .search-box {
       display: flex;
@@ -891,12 +954,14 @@
       <h1>SOK</h1>
 
     </div>
-    <nav id="desktop-nav">
-      <ul>
-        <li><a href="index.html" class="active">HOME</a></li>
-        <li><a href="branches.html" class="active" >BRANCHES</a></li>
-      </ul>
-    </nav>
+
+<nav id="desktop-nav">
+  <ul>
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="branches.html">BRANCHES</a></li>
+  </ul>
+</nav>
+
     <button class="theme-toggle" id="theme-toggle">
       <i class="bi bi-sun"></i>
       <i class="bi bi-moon" style="display: none;"></i>
