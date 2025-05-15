@@ -1254,6 +1254,96 @@
 
   <script>
 
+// Disable right-click
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+});
+
+// Disable keyboard shortcuts
+document.addEventListener('keydown', function (e) {
+  const key = e.key.toLowerCase();
+
+  if (
+    e.keyCode === 123 || // F12
+    (e.ctrlKey && e.shiftKey && key === 'i') || // Ctrl+Shift+I
+    (e.ctrlKey && key === 'u') || // Ctrl+U
+    (e.ctrlKey && key === 's') || // Ctrl+S
+    (e.ctrlKey && key === 'c')    // Ctrl+C
+  ) {
+    e.preventDefault();
+  }
+});
+
+// Disable dragstart (image/text drag)
+document.addEventListener('dragstart', function (e) {
+  e.preventDefault();
+});
+
+// Disable text selection (double tap / long press drag)
+document.addEventListener('selectstart', function (e) {
+  e.preventDefault();
+});
+
+// Disable iframe view
+if (window.top !== window.self) {
+  window.top.location = window.self.location;
+}
+
+// DevTools detection via console.log trick
+(function () {
+  const element = new Image();
+  Object.defineProperty(element, 'id', {
+    get: function () {
+      showBlockMessage();
+    }
+  });
+  setInterval(function () {
+    console.log(element);
+  }, 1000);
+})();
+
+// DevTools detection via size difference
+(function () {
+  const threshold = 160;
+  setInterval(() => {
+    const widthExceeded = window.outerWidth - window.innerWidth > threshold;
+    const heightExceeded = window.outerHeight - window.innerHeight > threshold;
+
+    if (widthExceeded || heightExceeded) {
+      showBlockMessage();
+    }
+  }, 1000);
+})();
+
+// Disable long-press (on links and entire page)
+let touchTimer = null;
+document.addEventListener('touchstart', function (e) {
+  touchTimer = setTimeout(() => {
+    e.preventDefault(); // Block long-press on any element
+  }, 500); // 500ms = long-press threshold
+}, { passive: false });
+
+document.addEventListener('touchend', function () {
+  clearTimeout(touchTimer);
+});
+
+// Also disable context menu for long-press links
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+});
+
+// Display block message with GIF
+function showBlockMessage() {
+  document.body.innerHTML = `
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: black; color: white;">
+      <h1 style="font-size: 3rem;">Enduku ?</h1>
+      <img src="https://media1.tenor.com/m/J8YuZ9x6Q_kAAAAC/athadu-telugu.gif" alt="Enduku GIF" style="max-width: 100%; height: auto; margin-top: 20px;" />
+    </div>
+  `;
+}
+    
     // Mobile menu functionality
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
