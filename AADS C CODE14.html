@@ -1207,7 +1207,7 @@
         <!-- Simplified Poster Container -->
         <div class="poster-container">
           <div class="poster-image">
-            <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/exp/EXP13.jpg" alt="LAB 1 Image">
+            <img src="https://raw.githubusercontent.com/studentsofklu/sok/main/exp/EXP14.jpg" alt="LAB 1 Image">
           </div>
         </div>
         
@@ -1265,13 +1265,12 @@ document.addEventListener('contextmenu', function (e) {
 document.addEventListener('keydown', function (e) {
   const key = e.key.toLowerCase();
 
-  // Block F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+C
   if (
     e.keyCode === 123 || // F12
     (e.ctrlKey && e.shiftKey && key === 'i') || // Ctrl+Shift+I
     (e.ctrlKey && key === 'u') || // Ctrl+U
     (e.ctrlKey && key === 's') || // Ctrl+S
-    (e.ctrlKey && key === 'c') // Ctrl+C
+    (e.ctrlKey && key === 'c')    // Ctrl+C
   ) {
     e.preventDefault();
   }
@@ -1300,7 +1299,6 @@ if (window.top !== window.self) {
       showBlockMessage();
     }
   });
-
   setInterval(function () {
     console.log(element);
   }, 1000);
@@ -1319,18 +1317,23 @@ if (window.top !== window.self) {
   }, 1000);
 })();
 
-// Disable long-press on links (especially in Telegram mobile)
+// Disable long-press (on links and entire page)
 let touchTimer = null;
 document.addEventListener('touchstart', function (e) {
-  if (e.target.tagName.toLowerCase() === 'a') {
-    touchTimer = setTimeout(function () {
-      e.preventDefault();
-    }, 500); // Long press threshold
-  }
+  touchTimer = setTimeout(() => {
+    e.preventDefault(); // Block long-press on any element
+  }, 500); // 500ms = long-press threshold
 }, { passive: false });
 
 document.addEventListener('touchend', function () {
   clearTimeout(touchTimer);
+});
+
+// Also disable context menu for long-press links
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
 });
 
 // Display block message with GIF
@@ -1342,7 +1345,6 @@ function showBlockMessage() {
     </div>
   `;
 }
-
 
     // Mobile menu functionality
     const menuToggle = document.getElementById('menu-toggle');
