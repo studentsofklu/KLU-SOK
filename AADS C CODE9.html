@@ -1255,7 +1255,56 @@
 
   <script>
 
-    
+// Disable right-click
+document.addEventListener('contextmenu', function (e) {
+  e.preventDefault();
+});
+
+// Disable keyboard shortcuts
+document.addEventListener('keydown', function (e) {
+  const key = e.key.toLowerCase();
+
+  // Block F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+C
+  if (
+    e.keyCode === 123 || // F12
+    (e.ctrlKey && e.shiftKey && key === 'i') || // Ctrl+Shift+I
+    (e.ctrlKey && key === 'u') || // Ctrl+U
+    (e.ctrlKey && key === 's') || // Ctrl+S
+    (e.ctrlKey && key === 'c') // Ctrl+C
+  ) {
+    e.preventDefault();
+  }
+});
+
+// Disable dragstart (image/text drag)
+document.addEventListener('dragstart', function (e) {
+  e.preventDefault();
+});
+
+// Disable text selection (double tap / long press drag)
+document.addEventListener('selectstart', function (e) {
+  e.preventDefault();
+});
+
+// Disable iframe view
+if (window.top !== window.self) {
+  window.top.location = window.self.location;
+}
+
+// DevTools detection via console.log trick
+(function () {
+  const element = new Image();
+  Object.defineProperty(element, 'id', {
+    get: function () {
+      showBlockMessage();
+    }
+  });
+
+  setInterval(function () {
+    console.log(element);
+  }, 1000);
+})();
+
 // DevTools detection via size difference
 (function () {
   const threshold = 160;
@@ -1278,6 +1327,7 @@ function showBlockMessage() {
     </div>
   `;
 }
+
 
 
     // Mobile menu functionality
