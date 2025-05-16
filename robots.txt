@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://studentsofklu.github.io/KLU-SOK/sitemap.xml
