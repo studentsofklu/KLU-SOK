@@ -151,7 +151,6 @@
   position: relative;
   margin: 0 10px;
 }
-
 #desktop-nav ul li a {
   color: white;
   text-decoration: none;
@@ -162,6 +161,11 @@
   position: relative;
   transition: color 0.3s ease;
   z-index: 0;
+}
+
+/* Light mode: override color */
+body[data-theme="light"] #desktop-nav ul li a {
+  color: black;
 }
 
 /* Create 4 glowing border lines initially hidden */
